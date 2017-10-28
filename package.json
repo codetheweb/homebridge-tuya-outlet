@@ -1,0 +1,25 @@
+{
+  "name": "homebridge-tuya-outlet",
+  "version": "0.1.0",
+  "description": "Homebridge plugin for devices utilizing Tuya's API: https://github.com/codetheweb/homebridge-tuya-outlet",
+  "license": "MIT",
+  "keywords": [
+    "homebridge-plugin",
+    "tuya",
+    "jinvoo"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/codetheweb/homebridge-tuya-outlet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codetheweb/homebridge-tuya-outlet/issues"
+  },
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  },
+  "dependencies": {
+    "tuyapi": "^0.1.2"
+  }
+}
