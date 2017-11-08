@@ -36,3 +36,8 @@ TuyaOutlet.prototype._get = function(callback) {
 TuyaOutlet.prototype.getServices = function() {
   return [this._service];
 }
+
+TuyaOutlet.prototype.identify = function (callback) {
+  this.log(_this.config.name + " was identified.");
+  callback();
+};
