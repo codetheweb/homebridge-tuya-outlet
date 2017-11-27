@@ -20,6 +20,6 @@
     "homebridge": ">=0.2.0"
   },
   "dependencies": {
-    "tuyapi": "^0.1.2"
+    "tuyapi": "^1.1.0"
   }
 }
