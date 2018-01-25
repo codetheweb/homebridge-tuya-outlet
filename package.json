@@ -1,6 +1,6 @@
 {
   "name": "homebridge-tuya-outlet",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Homebridge plugin for devices utilizing Tuya's API: https://github.com/codetheweb/homebridge-tuya-outlet",
   "license": "MIT",
   "keywords": [
