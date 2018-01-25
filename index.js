@@ -1,4 +1,5 @@
 const tuya = require('tuyapi');
+const debug = require('debug')('homebridge-tuya');
 
 module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
@@ -10,7 +11,13 @@ module.exports = function(homebridge) {
 function TuyaOutlet(log, config) {
   this.log = log;
   this.name = config.name;
-  this.tuya = new tuya({type: 'outlet', ip: config.ip, id: config.devId, uid: config.uid, key: config.localKey});
+  if (config.ip != undefined) {
+    this.tuya = new tuya({type: 'outlet', ip: config.ip, id: config.devId, key: config.localKey});
+  }
+  else {
+    this.tuya = new tuya({type: 'outlet', id: config.devId, key: config.localKey});
+    this.tuya.resolveIds();
+  }
 
   this._service = new Service.Outlet(this.name);
   this._service.getCharacteristic(Characteristic.On).on('set', this._setOn.bind(this));
@@ -18,18 +25,21 @@ function TuyaOutlet(log, config) {
 }
 
 TuyaOutlet.prototype._setOn = function(on, callback) {
-  this.log("Setting device to " + on);
-  this.tuya.setStatus(on, (error, result) => {
-    if (error) { return callback(error, null); }
+  debug("Setting device to " + on);
+
+  this.tuya.set({set: on}).then(() => {
     return callback(null, true);
+  }).catch(error => {
+    return callback(error, null);
   });
 }
 
 TuyaOutlet.prototype._get = function(callback) {
-  this.log("Getting device status...");
-  this.tuya.getStatus((error, result) => {
-    if (error) { return callback(error, null); }
-    return callback(null, result);
+  debug("Getting device status...");
+  this.tuya.get().then(status => {
+    return callback(null, status);
+  }).catch(error => {
+    callback(error, null);
   });
 }
 
@@ -38,6 +48,6 @@ TuyaOutlet.prototype.getServices = function() {
 }
 
 TuyaOutlet.prototype.identify = function (callback) {
-  this.log(_this.config.name + " was identified.");
+  debug(_this.config.name + " was identified.");
   callback();
 };
