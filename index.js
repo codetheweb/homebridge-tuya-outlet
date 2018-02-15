@@ -11,7 +11,7 @@ module.exports = function(homebridge) {
 function TuyaOutlet(log, config) {
   this.log = log;
   this.name = config.name;
-  if (config.viv != undefined) {
+  if (config.ip != undefined) {
     this.tuya = new tuya({type: 'outlet', ip: config.ip, id: config.devId, key: config.localKey, uid: config.uid});
   }
   else {
