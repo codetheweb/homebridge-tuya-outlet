@@ -7,6 +7,7 @@ Example `config.json`:
       "accessory": "TuyaOutlet",
       "name": "Tuya Outlet",
       "devId": "xxxxxxxxxxxxxxxxxxx",
+      "uid": "xxxxxxxxxxxxxx"
       "localKey": "xxxxxxxxxxxxxxx"
     }
 
