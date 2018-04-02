@@ -48,6 +48,6 @@ TuyaOutlet.prototype.getServices = function() {
 }
 
 TuyaOutlet.prototype.identify = function (callback) {
-  debug(_this.config.name + " was identified.");
+  debug(this.config.name + " was identified.");
   callback();
 };
