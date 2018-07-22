@@ -11,6 +11,7 @@ module.exports = function(homebridge) {
 function TuyaOutlet(log, config) {
   this.log = log;
   this.name = config.name;
+  this.dps = config.dps;
   if (config.ip != undefined) {
     this.tuya = new tuya({type: 'outlet', ip: config.ip, id: config.devId, key: config.localKey});
   }
@@ -27,7 +28,7 @@ function TuyaOutlet(log, config) {
 TuyaOutlet.prototype._setOn = function(on, callback) {
   debug("Setting device to " + on);
 
-  this.tuya.set({set: on}).then(() => {
+  this.tuya.set({set: on, dps: this.dps}).then(() => {
     return callback(null, true);
   }).catch(error => {
     return callback(error, null);
@@ -36,8 +37,10 @@ TuyaOutlet.prototype._setOn = function(on, callback) {
 
 TuyaOutlet.prototype._get = function(callback) {
   debug("Getting device status...");
-  this.tuya.get().then(status => {
-    return callback(null, status);
+  this.tuya.get({schema: true}).then(status => {
+    debug(status);
+    debug("  => " + status.dps[this.dps || 1]);
+    return callback(null, status.dps[this.dps || 1]);
   }).catch(error => {
     callback(error, null);
   });
