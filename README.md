@@ -1,3 +1,5 @@
+**DEPRECTED: please use [homebridge-tuya](https://www.npmjs.com/package/homebridge-tuya) instead**
+
 Tuya Outlet Support for Homebridge
 ===================================
 
